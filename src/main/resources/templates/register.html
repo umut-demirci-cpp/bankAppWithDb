@@ -1,24 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
+    <meta charset="UTF-8">
     <title>Hesap Aç</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 2.5rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #388e3c;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin: 0.75rem 0 0.25rem;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+    </style>
 </head>
 <body>
-<h2>Yeni Hesap Oluştur</h2>
-<form th:action="@{/register}" method="post">
-    <label for="name">İsim:</label>
-    <input type="text" id="name" name="name" required/><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required/><br>
+<div class="form-container">
+    <h2>Yeni Hesap Oluştur</h2>
+    <form th:action="@{/register}" method="post">
+        <label for="name">İsim:</label>
+        <input type="text" id="name" name="name" required/>
 
-    <label for="password">Şifre:</label>
-    <input type="password" id="password" name="password" required/><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required/>
 
-    <label for="balance">Başlangıç Bakiyesi:</label>
-    <input type="number" step="0.01" id="balance" name="balance" required/><br>
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" required/>
 
-    <button type="submit">Kaydol</button>
-</form>
+        <label for="balance">Başlangıç Bakiyesi:</label>
+        <input type="number" step="0.01" id="balance" name="balance" required/>
+
+        <button type="submit">Kaydol</button>
+    </form>
+</div>
+
 </body>
 </html>

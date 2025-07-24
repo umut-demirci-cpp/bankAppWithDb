@@ -1,11 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
+    <meta charset="UTF-8">
     <title>Banka Ana Sayfa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #c8e6c9);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2.5rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 2rem;
+        }
+
+        a.button {
+            display: inline-block;
+            margin: 0.5rem 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover {
+            background-color: #43a047;
+        }
+    </style>
 </head>
 <body>
-<h1>Hos Geldiniz!</h1>
-<a th:href="@{/register}">Yeni Hesap Aç</a> <br>
-<a th:href="@{/login}">Hesabim Var (Giris Yap)</a>
+
+<div class="container">
+    <h1>Hoş Geldiniz!</h1>
+    <a th:href="@{/register}" class="button">Yeni Hesap Aç</a>
+    <a th:href="@{/login}" class="button">Giriş Yap</a>
+</div>
+
 </body>
 </html>

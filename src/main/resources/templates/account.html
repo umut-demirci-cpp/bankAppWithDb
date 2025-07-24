@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
-    <title>Hesabim</title>
+    <meta charset="UTF-8">
+    <title>Hesabım</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .account-container {
+            background-color: white;
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        p.balance {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .actions a {
+            padding: 0.75rem;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .actions a:hover {
+            background-color: #45a049;
+        }
+
+        .logout {
+            background-color: #f44336;
+        }
+
+        .logout:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
-<h2>Hos Geldiniz <span th:text="${customer.name}">Musteri</span></h2>
-<p>Bakiyeniz: <strong th:text="${customer.balance}">0</strong> TL</p>
 
-<p>Para Yatir | Para Cek | Transfer Yap | Cikis</p>
+<div class="account-container">
+    <h2>Hoş Geldiniz, <span th:text="${customer.name}">Müşteri</span></h2>
+
+    <p class="balance">Bakiyeniz: <strong th:text="${customer.balance}">0</strong> TL</p>
+
+    <div class="actions">
+        <a th:href="@{/deposit}">Para Yatır</a>
+        <a th:href="@{/withdraw}">Para Çek</a>
+        <a th:href="@{/transfer}">Transfer Yap</a>
+        <a th:href="@{/logout}" class="logout">Çıkış</a>
+    </div>
+</div>
+
 </body>
 </html>
