@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
+<head>
+    <title>Hesabim</title>
+</head>
+<body>
+<h2>Hos Geldiniz <span th:text="${customer.name}">Musteri</span></h2>
+<p>Bakiyeniz: <strong th:text="${customer.balance}">0</strong> TL</p>
+
+<p>Para Yatir | Para Cek | Transfer Yap | Cikis</p>
+</body>
+</html>
