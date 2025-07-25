@@ -87,6 +87,62 @@
             text-decoration: underline;
         }
     </style>
+    <style>
+        .transaction-history-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9fb;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .history-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid #047006;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .transaction-item:hover {
+            background-color: #f1f5ff;
+        }
+
+        .left-section .type {
+            font-weight: bold;
+            color: #14a31e;
+            margin-bottom: 5px;
+        }
+
+        .left-section .amount {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .left-section .desc {
+            color: #555;
+        }
+
+        .right-section .date,
+        .right-section .balance {
+            text-align: right;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
@@ -127,6 +183,22 @@
 
     <div class="logout">
         <a th:href="@{/logout}">Çıkış Yap</a>
+    </div>
+    <div class="transaction-history-box">
+        <h3 class="history-title">İşlem Geçmişi</h3>
+        <div class="transactions">
+            <div th:each="transaction : ${transactions}" class="transaction-item">
+                <div class="left-section">
+                    <div class="type" th:text="${transaction.transactionType}">İşlem Tipi</div>
+                    <div class="amount"><span th:text="${transaction.amount}">0</span> TL</div>
+                    <div class="desc" th:text="${transaction.description}">Açıklama</div>
+                </div>
+                <div class="right-section">
+                    <div class="date" th:text="${#temporals.format(transaction.timestamp, 'dd/MM/yyyy HH:mm')}">Tarih</div>
+                    <div class="balance">Kalan: <span th:text="${transaction.balanceAfterTransaction}">0</span> TL</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
