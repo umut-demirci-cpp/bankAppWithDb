@@ -91,7 +91,7 @@
 <body>
 
 <div class="container">
-    <h2>Hoşgeldiniz, <span th:text="${customer.name}">Müşteri</span></h2>
+    <h2>Hoş Geldin, <span th:text="${customer.name}">Müşteri</span></h2>
     <div class="balance">Bakiyeniz: <strong th:text="${customer.balance}">0</strong> TL</div>
 
     <div th:if="${error}" class="message error" th:text="${error}"></div>

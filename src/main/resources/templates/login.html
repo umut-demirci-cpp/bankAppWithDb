@@ -63,6 +63,19 @@
         button:hover {
             background-color: #45a049;
         }
+
+        a.home-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a.home-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +94,8 @@
 
         <button type="submit">Giriş Yap</button>
     </form>
+
+    <a th:href="@{/}" class="home-link">Ana Menüye Dön</a>
 </div>
 
 </body>
