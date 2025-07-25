@@ -2,6 +2,7 @@ package com.demo.bankappwithdb.controller;
 
 import com.demo.bankappwithdb.model.Customer;
 import com.demo.bankappwithdb.repository.CustomerRepository;
+import com.demo.bankappwithdb.utility.ValidationUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,7 @@ public class AccountController {
     // Para yatırma işlemi
     @PostMapping("/deposit")
     public String deposit(@RequestParam double amount, HttpSession session, RedirectAttributes redirectAttributes) {
-        if (amount <= 0) {
-            redirectAttributes.addFlashAttribute("error", "Geçerli bir miktar giriniz.");
+        if (ValidationUtil.rejectIfInvalidAmount(amount, redirectAttributes)) {
             return "redirect:/account";
         }
 
@@ -55,8 +55,7 @@ public class AccountController {
     // Para çekme işlemi
     @PostMapping("/withdraw")
     public String withdraw(@RequestParam double amount, HttpSession session, RedirectAttributes redirectAttributes) {
-        if (amount <= 0) {
-            redirectAttributes.addFlashAttribute("error", "Geçerli bir miktar giriniz.");
+        if (ValidationUtil.rejectIfInvalidAmount(amount, redirectAttributes)) {
             return "redirect:/account";
         }
 
@@ -86,8 +85,7 @@ public class AccountController {
                            HttpSession session,
                            RedirectAttributes redirectAttributes) {
 
-        if (amount <= 0) {
-            redirectAttributes.addFlashAttribute("error", "Geçerli bir miktar giriniz.");
+        if (ValidationUtil.rejectIfInvalidAmount(amount, redirectAttributes)) {
             return "redirect:/account";
         }
 

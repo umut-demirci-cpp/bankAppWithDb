@@ -93,6 +93,9 @@
 <div class="container">
     <h2>Hoş Geldin, <span th:text="${customer.name}">Müşteri</span></h2>
     <div class="balance">Bakiyeniz: <strong th:text="${customer.balance}">0</strong> TL</div>
+    <div class="message info">
+        ⚠️ İşlem yapılan para miktarı en az 50 TL ve 50’nin katı olmalıdır.
+    </div>
 
     <div th:if="${error}" class="message error" th:text="${error}"></div>
     <div th:if="${success}" class="message success" th:text="${success}"></div>
