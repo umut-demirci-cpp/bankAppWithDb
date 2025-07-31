@@ -1,17 +1,13 @@
-package com.demo.bankappwithdb.model;
+package com.demo.bankappwithdb.dto;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@Table(name = "customer_table")
-public class Customer {
+public class CustomerDTO {
 
-    @Id
-    private Long id;  // T.C. Kimlik No gibi
+    private Long id;
 
     private String name;
 

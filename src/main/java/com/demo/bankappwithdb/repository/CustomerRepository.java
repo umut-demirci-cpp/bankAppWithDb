@@ -3,8 +3,9 @@ package com.demo.bankappwithdb.repository;
 import com.demo.bankappwithdb.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    Customer findByEmailAndPassword(String email, String email1);
+import java.util.Optional;
 
-    Customer findByEmail(String recipientEmail);
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    Optional<Customer> findByIban(String iban);
+    boolean existsByIban(String iban);
 }
