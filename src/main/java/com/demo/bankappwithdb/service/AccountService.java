@@ -4,6 +4,9 @@ import com.demo.bankappwithdb.model.Customer;
 import com.demo.bankappwithdb.model.Transaction;
 import com.demo.bankappwithdb.repository.CustomerRepository;
 import com.demo.bankappwithdb.repository.TransactionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -71,5 +74,11 @@ public class AccountService {
             receiverTx.setBalanceAfterTransaction(receiver.getBalance());
             transactionRepository.save(receiverTx);
         }
+    }
+
+    // Yeni eklenen metot: İşlem geçmişini sayfa sayfa getirir
+    public Page<Transaction> getTransactionsByCustomerId(Long customerId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return transactionRepository.findByCustomerIdOrderByTimestampDesc(customerId, pageable);
     }
 }

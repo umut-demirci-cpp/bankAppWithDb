@@ -2,8 +2,12 @@ package com.demo.bankappwithdb.repository;
 
 import com.demo.bankappwithdb.model.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findByCustomerIdOrderByTimestampDesc(Long customerId);
+
+    Page<Transaction> findByCustomerIdOrderByTimestampDesc(Long customerId, Pageable pageable);
+
+    // List<Transaction> findByCustomerId(Long customerId);
 }

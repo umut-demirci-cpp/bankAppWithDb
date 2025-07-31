@@ -8,19 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "home"; // home.html sayfasını döndürür
+        return "home";
     }
-
-    @GetMapping("/register")
-    public String showRegisterForm() {
-        return "register";
-    }
-
-    /*
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }
-    */
-
 }

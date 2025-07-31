@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>🧾 İşlem Geçmişi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #2a7a2a;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #2a7a2a;
+            color: white;
+        }
+        button, .btn-link {
+            width: 100%;
+            background-color: #2a7a2a;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+        }
+        button:hover, .btn-link:hover {
+            background-color: #1f5c1f;
+        }
+        .back-link {
+            margin-top: 15px;
+            color: #2a7a2a;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🧾 İşlem Geçmişi</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Tarih</th>
+            <th>İşlem Tipi</th>
+            <th>Tutar (TL)</th>
+            <th>Bakiye (TL)</th>
+        </tr>
+        </thead>
+        <tbody id="transactions-table-body">
+        <tr th:each="tx : ${transactions}">
+            <td th:text="${#temporals.format(tx.timestamp, 'dd.MM.yyyy HH:mm')}"></td>
+            <td th:text="${tx.type}"></td>
+            <td th:text="${tx.amount}"></td>
+            <td th:text="${tx.balanceAfterTransaction}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button id="loadMoreBtn">Daha Fazlasını Göster</button>
+
+    <a th:href="@{/account}" class="back-link">🏠 Hesaba Dön</a>
+</div>
+
+<script>
+    let currentPage = 1; // İlk sayfa zaten yüklü (0 tabanlı backend varsa currentPage-1 olarak kullan)
+    const pageSize = 5;
+
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const tbody = document.getElementById("transactions-table-body");
+
+    loadMoreBtn.addEventListener("click", () => {
+        fetch(`/account/transactions/load?page=${currentPage}&size=${pageSize}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+                    loadMoreBtn.style.display = "none";
+                    return;
+                }
+
+                data.forEach(tx => {
+                    const tr = document.createElement("tr");
+                    const date = new Date(tx.timestamp).toLocaleString("tr-TR");
+                    tr.innerHTML = `
+            <td>${date}</td>
+            <td>${tx.type}</td>
+            <td>${tx.amount}</td>
+            <td>${tx.balanceAfterTransaction}</td>
+          `;
+                    tbody.appendChild(tr);
+                });
+
+                if (data.length < pageSize) {
+                    loadMoreBtn.style.display = "none";
+                }
+                currentPage++;
+            })
+            .catch(error => {
+                console.error("Hata:", error);
+            });
+    });
+</script>
+
+</body>
+</html>
