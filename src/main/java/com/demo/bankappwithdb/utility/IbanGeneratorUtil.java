@@ -2,7 +2,7 @@ package com.demo.bankappwithdb.utility;
 
 import java.util.Random;
 
-public class IbanGenerator {
+public class IbanGeneratorUtil {
 
     public static String generateIban() {
         Random random = new Random();

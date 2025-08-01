@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="tr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>🏦 Banka Uygulaması</title>
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- Favicon (eğer favicon.ico dosyan varsa /static/images içine koy) -->
-  <link rel="icon" href="/images/bankicon.png" type="image/x-icon">
+  <link rel="icon" href="/images/bankicon.png" type="image/x-icon" />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #c8e6c9);
+      font-family: 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #6cc24a, #2a7a2a);
+      color: #333;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -23,97 +27,100 @@
       transition: background 0.3s ease;
     }
 
-    body.dark {
-      background: linear-gradient(135deg, #2e2e2e, #1b1b1b);
-      color: white;
-    }
-
     .container {
-      background-color: white;
-      padding: 2.5rem 3rem;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 500px;
+      background: #fff;
+      max-width: 460px;
       width: 100%;
-      transition: background-color 0.3s ease;
+      padding: 35px 40px;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      text-align: center;
     }
 
-    body.dark .container {
-      background-color: #333;
-    }
-
-    .logo {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    img {
+      width: 120px;
+      margin-bottom: 25px;
     }
 
     h1 {
-      color: #2e7d32;
-      margin-bottom: 1rem;
-    }
-
-    body.dark h1 {
-      color: #a5d6a7;
+      color: #2a7a2a;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 15px;
     }
 
     p.subtitle {
-      color: #555;
+      color: #4a4a4a;
       font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    body.dark p.subtitle {
-      color: #ccc;
+      margin-bottom: 30px;
+      font-weight: 500;
     }
 
     a.button {
       display: inline-block;
-      margin: 0.5rem 0.75rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #4CAF50;
+      background-color: #2a7a2a;
       color: white;
+      padding: 13px 0;
+      width: 48%;
+      margin: 0 1%;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: all 0.3s ease-in-out;
-      transform: scale(1);
+      box-shadow: 0 5px 15px rgba(42,122,42,0.6);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
     }
 
     a.button:hover {
-      background-color: #43a047;
-      transform: scale(1.05);
+      background-color: #1f5c1f;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(31,92,31,0.75);
     }
 
     .theme-toggle {
-      margin-top: 1.5rem;
+      margin-top: 25px;
       font-size: 0.9rem;
       cursor: pointer;
-      color: #555;
+      color: #2a7a2a;
+      font-weight: 600;
+      user-select: none;
+      transition: color 0.3s ease;
     }
 
-    body.dark .theme-toggle {
-      color: #aaa;
+    .theme-toggle:hover {
+      color: #1f5c1f;
+      text-decoration: underline;
     }
 
     footer {
-      margin-top: 2rem;
+      margin-top: 30px;
       font-size: 0.85rem;
-      color: #777;
+      color: #4a4a4a;
     }
 
-    body.dark footer {
-      color: #aaa;
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      a.button {
+        width: 100%;
+        margin: 10px 0;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <!--<div class="logo">💰</div>-->
-  <img src="/images/bankicon.png" alt="Banka Logosu" width="150">
+  <img src="/images/bankicon.png" alt="Banka Logosu" />
   <h1>Banka Uygulamasına Hoş Geldiniz</h1>
-  <p class="subtitle">"Hesabınızı yönetin, para yatırın, çekin ve transfer yapın."</p>
+  <p class="subtitle">Hesabınızı yönetin, para yatırın, çekin ve transfer yapın.</p>
+
   <a th:href="@{/register}" class="button">📝 Yeni Hesap Aç</a>
   <a th:href="@{/login}" class="button">🔐 Giriş Yap</a>
 
@@ -125,6 +132,21 @@
 <script>
   function toggleTheme() {
     document.body.classList.toggle('dark');
+    if(document.body.classList.contains('dark')){
+      document.body.style.background = 'linear-gradient(135deg, #2e2e2e, #1b1b1b)';
+      document.querySelector('.container').style.backgroundColor = '#333';
+      document.querySelector('footer').style.color = '#aaa';
+      document.querySelector('.theme-toggle').style.color = '#aaa';
+      document.querySelector('h1').style.color = '#a5d6a7';
+      document.querySelector('p.subtitle').style.color = '#ccc';
+    } else {
+      document.body.style.background = 'linear-gradient(135deg, #6cc24a, #2a7a2a)';
+      document.querySelector('.container').style.backgroundColor = '#fff';
+      document.querySelector('footer').style.color = '#4a4a4a';
+      document.querySelector('.theme-toggle').style.color = '#2a7a2a';
+      document.querySelector('h1').style.color = '#2a7a2a';
+      document.querySelector('p.subtitle').style.color = '#4a4a4a';
+    }
   }
 </script>
 

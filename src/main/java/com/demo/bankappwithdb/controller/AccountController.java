@@ -74,28 +74,42 @@ public class AccountController {
 
     @PostMapping("/deposit")
     public String deposit(@RequestParam double amount, HttpSession session) {
+        if (amount < 50 || amount % 50 != 0) {
+            return "redirect:/account?error=amount";
+        }
+
         CustomerDTO customerDTO = (CustomerDTO) session.getAttribute("customer");
         Customer customer = CustomerMapper.toEntity(customerDTO);
         accountService.deposit(customer, amount);
-
         session.setAttribute("customer", CustomerMapper.toDto(customer));
+
         return "redirect:/account";
     }
+
 
     @PostMapping("/withdraw")
     public String withdraw(@RequestParam double amount, HttpSession session) {
+        if (amount < 50 || amount % 50 != 0) {
+            return "redirect:/account?error=amount";
+        }
+
         CustomerDTO customerDTO = (CustomerDTO) session.getAttribute("customer");
         Customer customer = CustomerMapper.toEntity(customerDTO);
         accountService.withdraw(customer, amount);
-
         session.setAttribute("customer", CustomerMapper.toDto(customer));
+
         return "redirect:/account";
     }
+
 
     @PostMapping("/transfer")
     public String transfer(@RequestParam String toIban,
                            @RequestParam double amount,
                            HttpSession session) {
+        if (amount < 50 || amount % 50 != 0) {
+            return "redirect:/account?error=amount";
+        }
+
         CustomerDTO senderDTO = (CustomerDTO) session.getAttribute("customer");
         Customer sender = CustomerMapper.toEntity(senderDTO);
 
@@ -107,6 +121,7 @@ public class AccountController {
 
         return "redirect:/account";
     }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
