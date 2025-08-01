@@ -9,5 +9,4 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     Page<Transaction> findByCustomerIdOrderByTimestampDesc(Long customerId, Pageable pageable);
 
-    // List<Transaction> findByCustomerId(Long customerId);
 }

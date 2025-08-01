@@ -16,7 +16,7 @@ public class Transaction {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")  // transaction tablosundaki foreign key sütunu
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     private String type;

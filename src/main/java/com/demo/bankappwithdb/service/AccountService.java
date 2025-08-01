@@ -76,7 +76,6 @@ public class AccountService {
         }
     }
 
-    // Yeni eklenen metot: İşlem geçmişini sayfa sayfa getirir
     public Page<Transaction> getTransactionsByCustomerId(Long customerId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return transactionRepository.findByCustomerIdOrderByTimestampDesc(customerId, pageable);

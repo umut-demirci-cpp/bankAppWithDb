@@ -1,6 +1,7 @@
 package com.demo.bankappwithdb.mapper;
 
 import com.demo.bankappwithdb.dto.CustomerDTO;
+import com.demo.bankappwithdb.dto.CustomerScreenDTO;
 import com.demo.bankappwithdb.model.Customer;
 import org.springframework.stereotype.Component;
 
@@ -30,5 +31,15 @@ public class CustomerMapper {
         customer.setBalance(customerDTO.getBalance());
         customer.setAge(customerDTO.getAge());
         return customer;
+    }
+
+    public static CustomerScreenDTO toScreenDto(CustomerDTO customerDTO){
+
+        CustomerScreenDTO screenDTO = new CustomerScreenDTO();
+        screenDTO.setName(customerDTO.getName());
+        screenDTO.setSurname(customerDTO.getSurname());
+        screenDTO.setIban(customerDTO.getIban());
+        screenDTO.setBalance(customerDTO.getBalance());
+        return screenDTO;
     }
 }

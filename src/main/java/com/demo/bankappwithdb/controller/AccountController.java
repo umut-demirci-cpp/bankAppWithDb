@@ -37,14 +37,12 @@ public class AccountController {
     public String accountPage(HttpSession session, Model model) {
         CustomerDTO customerDTO = (CustomerDTO) session.getAttribute("customer");
         if (customerDTO == null) {
-            // Müşteri yoksa login sayfasına yönlendir
             return "redirect:/login";
         }
         model.addAttribute("customer", customerDTO);
         return "account";
     }
 
-    // İşlem geçmişi sayfası için GET metodu
     @GetMapping("/transactions")
     public String transactions(
             @RequestParam(defaultValue = "0") int page,
@@ -71,7 +69,7 @@ public class AccountController {
         model.addAttribute("pageSize", size);
         model.addAttribute("customer", customerDTO);
 
-        return "transactions";  // transactions.html sayfası
+        return "transactions";
     }
 
     @PostMapping("/deposit")
@@ -123,7 +121,7 @@ public class AccountController {
                                                  @RequestParam(defaultValue = "5") int size) {
         CustomerDTO customerDTO = (CustomerDTO) session.getAttribute("customer");
         if (customerDTO == null) {
-            return List.of(); // Boş liste
+            return List.of();
         }
 
         Long customerId = customerDTO.getId();

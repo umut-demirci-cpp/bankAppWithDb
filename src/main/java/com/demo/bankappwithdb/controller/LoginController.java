@@ -32,7 +32,6 @@ public class LoginController {
             session.setAttribute("customer", customerDTO);
             return "redirect:/account";
         } catch (RuntimeException e) {
-            // Hata mesajını modele ekle, form tekrar gösterilir
             model.addAttribute("errorMessage", e.getMessage());
             return "login";
         }

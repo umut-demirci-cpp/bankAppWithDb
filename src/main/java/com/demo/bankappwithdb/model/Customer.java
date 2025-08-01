@@ -11,8 +11,9 @@ import lombok.Setter;
 public class Customer {
 
     @Id
-    private Long id;  // T.C. Kimlik No gibi
+    private Long id;
 
+    @Column(name = "username")
     private String name;
 
     private String surname;
